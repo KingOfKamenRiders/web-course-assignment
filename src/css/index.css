@@ -70,26 +70,38 @@
     cursor: pointer;
 }
 
+@keyframes rotate_title {
+    0% {transform: matrix(1,0,0,2,0,300px)}
+    50% {transform: matrix(-1,0,0,-1.5,0,150px)}
+    100% {transform: matrix(1,0,0,1,0,0)}
+}
+@-webkit-keyframes rotate_title {
+    from{height: 500px}
+    to{}
+}
 .header{
     height: 100px;
     background: linear-gradient(to right,red,purple);
     margin: 5px 20px auto auto;
     box-shadow: black 0 0 20px;
     color: white;
+    animation: rotate_title 1s;
+    -webkit-animation: rotate_title 1s;;
 }
 
 .nav-tab{
     height: 50px;
     border-radius: 10px;
-    background: darkorange;
+    background-color: red;
     margin: 10px auto;
     font-size: 20px;
     font-weight: bolder;
     text-align: center;
     text-justify: auto;
+    transition: background-color .8s;
 }
 .nav-tab:hover{
-    background-color: #ff0016;
+    background-color: purple;
     cursor: pointer;
 }
 .main{
@@ -108,3 +120,11 @@
     font-size: 200%;
     font-weight: bolder;
 }
+.footer{
+    margin-top: 20px;
+    background-color: darkslategray;
+    padding: 10px auto;
+    font-size: 20px;
+    text-align: center;
+}
+

@@ -76,8 +76,9 @@
     100% {transform: matrix(1,0,0,1,0,0)}
 }
 @-webkit-keyframes rotate_title {
-    from{height: 500px}
-    to{}
+    0% {-webkit-transform: matrix(1,0,0,2,0,300)}
+    50% {-webkit-transform: matrix(-1,0,0,-1.5,0,150)}
+    100% {-webkit-transform: matrix(1,0,0,1,0,0)}
 }
 .header{
     height: 100px;

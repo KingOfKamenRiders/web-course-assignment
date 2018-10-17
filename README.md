@@ -34,7 +34,7 @@
         - 第二次作业的库仍使用CDN，所以确保在有网络的情况下才能正常使用
     + 使用方法
         - npm  install
-        - npm run build (会在build目录下编译出静态资源，鉴于编译时间较长，moodle上的压缩包里会有一份已经编译好的)
+        - npm run build (会在dist目录下编译出静态资源，鉴于编译时间较长，moodle上的压缩包里会有一份已经编译好的)
         - cd backend && node app.js
         - 进入 localhost:3000查看
     + 其他需要提交的截图都在“第三次作业截图.pdf”中

@@ -1,0 +1,6 @@
+create table user(
+    -> cid varchar(64),
+    -> password varchar(64) not null,
+    -> level int(32),
+    -> expr int(32),
+    -> primary key(cid)) default charset=utf8;

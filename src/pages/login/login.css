@@ -1,9 +1,9 @@
-html{
-    height: 100%;
-}
 
-body{
-    background-image: url("../image/bg1.gif");
+.bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image: url("../../../static/image/bg1.gif");
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -13,15 +13,20 @@ body{
     display: flex;
     justify-content: center;
     height: 100%;
+    width: 100%;
 }
 
 .form_wrapper{
     align-self: center;
-    width: 40%;
+    width: 600px;
     height: 400px;
     background: rgba(255,95,11,.8);
     border-radius: 30px;
     box-shadow: black 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }
 .vertical_container{
     display: flex;
@@ -56,7 +61,7 @@ body{
 }
 .login_button{
     margin: 40px auto;
-    width: 100%;
+    width: 40%;
     height: 35px;
     background: deepskyblue;
     color: white;

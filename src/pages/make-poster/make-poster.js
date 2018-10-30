@@ -60,7 +60,7 @@ function init_canvas() {
         });
         c_poster.setBackgroundImage(img, c_poster.renderAll.bind(c_poster));
     })
-    c_ultimate = new fabric.Canvas(CANVAS_3_ID);
+     c_ultimate = new fabric.Canvas(CANVAS_3_ID);
 }
 
 //添加控件绑定方法
@@ -75,9 +75,35 @@ function add_hero_bind() {
                 c_portrait.setBackgroundImage(img, c_portrait.renderAll.bind(c_portrait));
             })
         cur_hero = HEROES[i];
-        }))
+        }));
+  $.each($('.hero_div'),(i,v)=>$(v).on('click',
+    ()=>{
+      console.log('clicked');
+      fabric.Image.fromURL(v.firstElementChild.src, function(img) {
+        img.set({
+          scaleX: CANVAS_1_WIDTH / img.width,
+          scaleY: CANVAS_1_HEIGHT / img.height
+        });
+        c_portrait.setBackgroundImage(img, c_portrait.renderAll.bind(c_portrait));
+      })
+      cur_hero = 'custom';
+    }));
 }
 
+export function initCustom(div) {
+  $(div).on('click',
+    ()=>{
+      console.log('clicked');
+      fabric.Image.fromURL(div.firstElementChild.src, function(img) {
+        img.set({
+          scaleX: CANVAS_1_WIDTH / img.width,
+          scaleY: CANVAS_1_HEIGHT / img.height,
+        });
+        c_portrait.setBackgroundImage(img, c_portrait.renderAll.bind(c_portrait));
+      },{crossOrigin: 'anonymous'});
+      cur_hero = 'custom';
+    })
+}
 
 function add_item_bind() {
     $.each($('#hs img'),(i,v)=>$(v).on('click',
@@ -174,12 +200,6 @@ function init_button() {
         $('.assemble-area').slideUp();
     })
     $('#next-4').on('click',function () {
-        console.log(c_poster.toDataURL({
-            left:anchor_x,
-            top:anchor_y,
-            width:crop_w,
-            height:crop_h,
-        }));
         fabric.Image.fromURL(c_poster.toDataURL({
             left:Math.round(anchor_x*CANVAS_2_WIDTH/500),
             top:Math.round(anchor_y*CANVAS_2_HEIGHT/375),

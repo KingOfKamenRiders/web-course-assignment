@@ -19,4 +19,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+  #app>div{
+    width: 100%;
+  }
 </style>

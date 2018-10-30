@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MyHeader></MyHeader>
+    <MyHeader/>
   <aside class="col-2 col-m-6">
     <div class="nav-tab nav-tab-special col-12" @click="goToDIY">
       海报DIY!
@@ -66,7 +66,7 @@
       <button>黑豹版块</button>
     </div>
   </main>
-    <MyFooter></MyFooter>
+    <MyFooter/>
   </div>
 </template>
 <script>
@@ -77,7 +77,10 @@
         components:{MyHeader,MyFooter},
         methods:{
           goToDIY(){
-            this.$router.push('/poster');
+            if(sessionStorage.getItem('cid'))
+              this.$router.push('/poster');
+            else
+              alert('请先登录!');
           }
         }
     }

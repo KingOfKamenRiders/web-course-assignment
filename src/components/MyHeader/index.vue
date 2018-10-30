@@ -1,13 +1,13 @@
 <template>
   <header class="col-12 header">
-    <h1>Marvel超级英雄论坛</h1>
+    <h1 @click="goToIndex">Marvel超级英雄论坛</h1>
     <div class="btn-wrapper" v-show="!isLoggedIn">
       <button class="btn" @click="goToLogin">登录</button>
       <button class="btn" @click="goToSignUp">注册</button>
     </div>
 
     <div v-show="isLoggedIn" class="welcome">
-      <span>欢迎你，{{isLoggedIn}}</span>
+      <span @click="goToPersonCenter">欢迎你，{{isLoggedIn}}</span>
       <button class="btn" @click="logOut" style="width: 60px;height: 30px"> 登出</button>
     </div>
   </header>
@@ -31,6 +31,12 @@
           logOut(){
             sessionStorage.removeItem('cid');
             this.isLoggedIn = null;
+          },
+          goToPersonCenter(){
+            this.$router.push('/person-center');
+          },
+          goToIndex(){
+            this.$router.push('/');
           }
         },
     }
@@ -72,6 +78,13 @@
   .welcome{
     display: flex;
     flex-direction: column;
+  }
+  span:hover{
+    cursor: pointer;
+    color:chartreuse;
+  }
+  h1:hover{
+    cursor: pointer;
   }
 </style>
 <style src="../../assets/css/layout.css"></style>

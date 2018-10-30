@@ -1,0 +1,21 @@
+.nav-tab{
+  height: 50px;
+  border-radius: 10px;
+  background-color: red;
+  margin: 10px auto;
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: center;
+  text-justify: auto;
+  transition: background-color .8s;
+}
+.nav-tab-special{
+  box-shadow: black 0 0 20px;
+  background-color: #ff3ac5;
+  font-size: 22px;
+  color: #ff145c;
+}
+.nav-tab:hover{
+  background-color: purple;
+  cursor: pointer;
+}

@@ -31,6 +31,11 @@
           <button>黑豹</button>
         </div>
       </div>
+      <div class="col-12">
+        <h3>我的英雄</h3>
+        <div class="myHeroes" id="heroes"></div>
+        <h4><a href="/#/person-center">没有英雄？赶紧去上传吧</a></h4>
+      </div>
       <div class="col-12" style="text-align: center">
         <button id="next-1" class="next">下一步</button>
       </div>
@@ -146,9 +151,22 @@
 </template>
 
 <script>
-  import {init} from "./make-poster"
+  import {init,initCustom} from "./make-poster";
+  import {getMyHeroes} from "../../api/upload"
+
   export default {
         name: "MakePoster",
+        created:function(){
+          console.log('created!');
+          getMyHeroes((response)=>response.data.forEach((v,i)=>{
+            let img = `<img src="${v}"  crossorigin="anonymous"><button>自定义英雄</button>`;
+            let div = document.createElement('div');
+            div.className = 'hero_div';
+            div.innerHTML = img;
+            document.getElementById('heroes').appendChild(div);
+            initCustom(div);
+          }))
+        },
         mounted:function () {
           init();
         }
@@ -157,5 +175,10 @@
 <style src="./make-poster.css"></style>
 <style src="../../assets/css/layout.css"></style>
 <style scoped>
-
+  #heroes{
+    display: flex;
+  }
+  .paper{
+    width: 100%;
+  }
 </style>

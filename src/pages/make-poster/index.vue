@@ -145,23 +145,54 @@
       <div class="h-container col-12">
         <canvas id="ultimate_work" width="800" height="600"></canvas>
       </div>
-
+      <div class="col-12 description">
+        将你的海报发布到论坛上，让大家都能看到你的作品！
+        <button @click="dialogVisible = true" class="next" id="publish" style="float: right">发布</button>
+      </div>
+      <el-dialog
+        title="提示"
+        :visible.sync="dialogVisible"
+        width="30%"
+        >
+        <el-form v-model="form" label-width="80px">
+          <el-form-item label="海报标题">
+            <el-input v-model="form.title" placeholder="请输入海报标题"></el-input>
+          </el-form-item>
+          <el-form-item label="海报描述">
+            <el-input type="textarea" v-model="form.description"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">立即发布</el-button>
+            <el-button>取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
-  import {init,initCustom} from "./make-poster";
+  import {init,initCustom,c_ultimate} from "./make-poster";
   import {getMyHeroes} from "../../api/upload"
+  import {uploadPoster} from "../../api/poster"
 
   export default {
         name: "MakePoster",
+        data:function () {
+          return({
+            dialogVisible:false,
+            form:{
+              title:'',
+              description:'',
+              poster:null,
+            }
+          })
+        },
         created:function(){
-          console.log('created!');
           getMyHeroes((response)=>response.data.forEach((v,i)=>{
             let img = `<img src="${v}"  crossorigin="anonymous"><button>自定义英雄</button>`;
             let div = document.createElement('div');
-            div.className = 'hero_div';
+            div.className = 'hero_div_poster';
             div.innerHTML = img;
             document.getElementById('heroes').appendChild(div);
             initCustom(div);
@@ -169,6 +200,26 @@
         },
         mounted:function () {
           init();
+        },
+        methods:{
+          onSubmit(){
+            this.form.poster = c_ultimate.toDataURL();
+            console.log(this.form);
+            uploadPoster(this.form, (res)=>{
+              if(res.data ==='OK'){
+                this.$message({
+                  message:'发布成功!',
+                  type:'success',
+                });
+              }else{
+                this.$message({
+                  message:'发布失败!',
+                  type:'error',
+                });
+              }
+              this.$router.push('/');
+            });
+          }
         }
     }
 </script>
@@ -178,7 +229,5 @@
   #heroes{
     display: flex;
   }
-  .paper{
-    width: 100%;
-  }
+
 </style>

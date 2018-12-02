@@ -13,6 +13,17 @@ module.exports = {
     proxyTable: {
       '/api':{
         target:'http://localhost:3000',
+      },
+      '/market':{
+        target:'https://api-ddc.wallstreetcn.com',
+        changeOrigin:true
+      },
+      '/sina':{
+        target:'http://hq.sinajs.cn',
+        changeOrigin:true,
+        pathRewrite:{
+          '^/sina':''
+        }
       }
     },
 

@@ -222,3 +222,5 @@ function set_visible() {
     $('.crop-area').hide();
     $('.ultimate').hide();
 }
+
+export {c_ultimate}

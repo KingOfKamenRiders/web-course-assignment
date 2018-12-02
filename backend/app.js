@@ -1,8 +1,10 @@
 const UserDAO = require( "./dao/UserDAO");
+const PosterDAO = require("./dao/PosterDAO")
 const ResultMessage = require("./util/ResultMessage");
 const express = require('express');
 const session = require('express-session');
 const crypto = require('crypto');
+const bodyParser = require('body-parser')
 const dbconfig = require('./dbconfig');
 const mysql = require('mysql');
 const multer = require('multer');
@@ -11,6 +13,8 @@ var fs = require('fs');
 
 
 
+app.use(bodyParser.json({limit:'10mb'})); // for parsing application/json
+app.use(bodyParser.urlencoded({ limit:'10mb',extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.use(express.static('../dist'));
 let options = {
@@ -50,11 +54,11 @@ connection.connect((err)=>{
 })
 
 //处理登陆
-app.get('/api/login',(req,res,next)=>{
+app.post('/api/login',(req,res,next)=>{
   let ud = new UserDAO(connection);
   const md5 = crypto.createHash('md5');
-  let codedPass = md5.update(req.query.password).digest('hex');
-  ud.getUser(req.query.cid,(error,results,fields)=>{
+  let codedPass = md5.update(req.body.password).digest('hex');
+  ud.getUser(req.body.cid,(error,results,fields)=>{
       if(error) {
         console.log('error!:' + error);
         res.send(ResultMessage.WRONG);
@@ -62,7 +66,7 @@ app.get('/api/login',(req,res,next)=>{
       else{
         if(results.length>0&&results[0].password === codedPass){
           console.log(req.session.cid);
-          req.session.cid = req.query.cid;
+          req.session.cid = req.body.cid;
 
           if(!fs.existsSync(`uploads/${req.session.cid}`)){
             fs.mkdirSync(`uploads/${req.session.cid}`);
@@ -84,18 +88,18 @@ app.get('/api/hello', function(req, res, next) {
   }
 })
 //处理注册
-app.get('/api/signUp',(req,res)=>{
+app.post('/api/signUp',(req,res)=>{
   let ud = new UserDAO(connection);
   const md5 = crypto.createHash('md5');
-  let codedPass = md5.update(req.query.password).digest('hex');
-  ud.insertUser({cid:req.query.cid,password:codedPass},
+  let codedPass = md5.update(req.body.password).digest('hex');
+  ud.insertUser({cid:req.body.cid,password:codedPass},
     (error,results,fields)=>{
     if(error) {
       console.log(error);
       res.send(ResultMessage.WRONG);
     }
     else{
-      req.session.cid = req.query.cid;
+      req.session.cid = req.body.cid;
       if(!fs.existsSync(`uploads/${req.session.cid}`)){
         fs.mkdirSync(`uploads/${req.session.cid}`);
       }
@@ -118,6 +122,23 @@ app.get('/api/myHeroes',(req,res)=>{
         list[i] = `http://localhost:3000/${req.session.cid}/` + list[i];
       res.send(list);
     }
+
+})
+
+app.post('/api/poster',(req,res)=>{
+  let pd = new PosterDAO(connection);
+  pd.insertPoster(req.session.cid,req.body,(error,results,fields)=>{
+    if(error){
+      console.log(error);
+      res.send(ResultMessage.WRONG);
+    }else{
+      res.send(ResultMessage.OK);
+    }
+  })
+
+})
+
+app.get('/api/hotTags',(req,res)=>{
 
 })
 app.listen(3000, () => console.log('Example app listening on port 3000!'))

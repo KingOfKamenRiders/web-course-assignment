@@ -5,6 +5,9 @@
     <div class="nav-tab nav-tab-special col-12" @click="goToDIY">
       海报DIY!
     </div>
+    <div class="nav-tab nav-tab-special col-12" @click="goToDIY">
+      海报海
+    </div>
     <div class="nav-tab col-12">
       电影区
     </div>
@@ -72,15 +75,21 @@
 <script>
     import MyHeader from '../../components/MyHeader/index'
     import MyFooter from '../../components/MyFooter/index'
+
     export default {
         name: "index",
         components:{MyHeader,MyFooter},
+        mounted(){
+        },
         methods:{
           goToDIY(){
             if(sessionStorage.getItem('cid'))
               this.$router.push('/poster');
             else
               alert('请先登录!');
+          },
+          goToPosterSea(){
+            this.$router.push('/poster-sea')
           }
         }
     }

@@ -6,6 +6,7 @@ import MakePoster from '../pages/make-poster'
 import SignUp from '../pages/signUp'
 import PersonCenter from '../pages/person-center'
 import MyHero from '../pages/person-center/MyHero'
+import PosterSea from '../pages/poster-sea'
 
 Vue.use(Router)
 
@@ -38,7 +39,12 @@ export default new Router({
       children:[
         {path:'',component:MyHero}
       ]
-    }
+    },
+    {
+      path:'/poster-sea',
+      name:'PosterSea',
+      component:PosterSea,
+    },
 
   ]
 })

@@ -5,7 +5,7 @@
     <div class="nav-tab nav-tab-special col-12" @click="goToDIY">
       海报DIY!
     </div>
-    <div class="nav-tab nav-tab-special col-12" @click="goToDIY">
+    <div class="nav-tab nav-tab-special col-12" @click="goToPosterSea">
       海报海
     </div>
     <div class="nav-tab col-12">
@@ -95,5 +95,5 @@
     }
 </script>
 
-<style src="./index.css"></style>
-<style src="../../assets/css/layout.css"></style>
+<style src="./index.css" scoped></style>
+<style src="../../assets/css/layout.css" scoped></style>

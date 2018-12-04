@@ -1,11 +1,11 @@
 <template>
-    <el-card>
-      <img :src="url" class="image"/>
+    <el-card shadow="hover">
+      <img :src="path" class="image"/>
       <div style="padding: 14px;">
         <span>{{title}}</span>
         <div class="bottom clearfix">
-          <span>作者：{{author}}</span>
-          <el-button type="text" class="button" @click="goToDetail">操作按钮</el-button>
+          <span>作者：{{auther}}</span>
+          <el-button type="text" class="button" @click="goToDetail">查看详情</el-button>
         </div>
       </div>
     </el-card>
@@ -14,10 +14,10 @@
 <script>
     export default {
         name: "index",
-        props:['url','title','author'],
+        props:['path','title','auther'],
         methods:{
           goToDetail(){
-
+            this.$router.push({path:'poster-detail',query:{path:this.path.slice(22)}});
           }
         }
     }

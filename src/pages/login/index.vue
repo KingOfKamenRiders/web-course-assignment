@@ -53,6 +53,7 @@
               (response)=>{
                 if(response.data === ResultMessage.OK){
                   sessionStorage.setItem('cid',this.cid);
+                  console.log(sessionStorage.getItem('cid'));
                   this.$router.push('/');
                 }else{
                   this.status = 1;

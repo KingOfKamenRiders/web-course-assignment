@@ -23,5 +23,5 @@
 <style scoped>
 
 </style>
-<style src="../../assets/css/layout.css"></style>
-<style src="./person-center.css"></style>
+<style src="../../assets/css/layout.css" scoped></style>
+<style src="./person-center.css" scoped></style>

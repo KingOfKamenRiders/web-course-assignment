@@ -223,8 +223,8 @@
         }
     }
 </script>
-<style src="./make-poster.css"></style>
-<style src="../../assets/css/layout.css"></style>
+<style src="./make-poster.css" ></style>
+<style src="../../assets/css/layout.css" ></style>
 <style scoped>
   #heroes{
     display: flex;

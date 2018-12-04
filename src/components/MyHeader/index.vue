@@ -14,7 +14,9 @@
 </template>
 
 <script>
-    export default {
+  import {logout,isLoggedIn} from "../../api/login";
+
+  export default {
         name: "my-header",
         data:function () {
           return({
@@ -29,8 +31,14 @@
             this.$router.push('/signUp');
           },
           logOut(){
-            sessionStorage.removeItem('cid');
-            this.isLoggedIn = null;
+            logout((res)=>{
+              if(res.data==="OK"){
+                sessionStorage.removeItem('cid');
+                this.isLoggedIn = null;
+              }else
+                console.log('error!');
+            })
+
           },
           goToPersonCenter(){
             this.$router.push('/person-center');
@@ -39,6 +47,15 @@
             this.$router.push('/');
           }
         },
+    mounted(){
+          isLoggedIn((res)=>{
+            console.log(res.data.length)
+            if(res.data.length>0)
+              this.isLoggedIn = res.data;
+            else
+              sessionStorage.removeItem('cid');
+          })
+    }
     }
 </script>
 

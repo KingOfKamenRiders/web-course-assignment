@@ -10,6 +10,7 @@
 * 第二次作业
 * 第三次作业 
 * 第四次作业
+* 第五次作业
 ## 历史
 * 第一次作业
     + 静态页面和CSS
@@ -57,3 +58,12 @@
       - 点击左侧栏中粉红色背景的“海报DIY”
       - 这次在选择英雄界面上可以选择自己上传的英雄了
       - 剩下的步骤见第二次作业
+* 第五次作业
+    + 使用session实现会话管理(保持登录)，提供一些措施提高安全性
+    + 会话管理实现方式：
+      - 使用[express-session](https://www.npmjs.com/package/express-session)中间件，实现对session的操作
+      - 使用[express-mysql-session](https://www.npmjs.com/package/express-mysql-session)中间件，将session 数据存储在MySQL数据库中(需要提供MySQL数据库连接)
+      - 每当用户登录时，记录下(sessionid,用户名)这一二元组到数据库中(由上述中间件自动完成)
+      - 每当用户登出时，删除登录时记下的记录，下次登录需要重新记录
+    + 安全性措施
+      - 详见 "session安全.md"文档
